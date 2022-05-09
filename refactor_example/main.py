@@ -24,6 +24,9 @@ class Order:
     balance: int = field(init=False)
 
     def __post_init__(self):
+        self.update_balance()
+
+    def update_balance(self):
         self.balance = reduce(
             lambda a, b: a + b, [row.row_price for row in self.order_items]
         )
