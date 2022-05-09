@@ -1,13 +1,22 @@
-import receipt
+from dataclasses import dataclass
+from typing import List
 from colorama import Fore
 
+import inventory
 
-def print_receipt(receipt: receipt.Receipt) -> None:
+
+@dataclass
+class OrderRow:
+    item: inventory.InventoryItem
+    quantity: int = 1
+
+
+def print_receipt(customer_name: str, item_list=List[OrderRow]) -> None:
     balance = 0
-    print(Fore.CYAN + f"Receipt for \033[1m{receipt.customer_name}\033[0m")
+    print(Fore.CYAN + f"Receipt for \033[1m{customer_name}\033[0m")
     print(Fore.YELLOW + "===========================================================")
     print(Fore.WHITE + "\033[1mItems:\033[0m")
-    for list_item in receipt.item_list:
+    for list_item in item_list:
         price = list_item.item.price * list_item.quantity
         print(
             f"{list_item.item.name}:\n\t Price: ${list_item.item.price/100:.2f} * Quantity: {list_item.quantity} = ${price/100:.2f} "
@@ -20,5 +29,20 @@ def print_receipt(receipt: receipt.Receipt) -> None:
 
 
 if __name__ == "__main__":
-    print_receipt(receipt.RECIEPT_ONE)
-    print_receipt(receipt.RECIEPT_TWO)
+    print_receipt(
+        customer_name="Joe Swanson",
+        item_list=[
+            OrderRow(item=inventory.MILK, quantity=2),
+            OrderRow(item=inventory.BREAD, quantity=1),
+            OrderRow(item=inventory.CHEESE),
+        ],
+    )
+    print_receipt(
+        customer_name="Peter Griffin",
+        item_list=[
+            OrderRow(item=inventory.BEEF, quantity=2),
+            OrderRow(item=inventory.LUCKY_CHARMS),
+            OrderRow(item=inventory.CHEESE, quantity=5),
+            OrderRow(item=inventory.MILK, quantity=3),
+        ],
+    )
