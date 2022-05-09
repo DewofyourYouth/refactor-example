@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from typing import List
+
 from colorama import Fore
 
 import inventory
@@ -13,18 +14,24 @@ class OrderRow:
 
 def print_receipt(customer_name: str, item_list=List[OrderRow]) -> None:
     balance = 0
+    # Extract functions
+    get_price = lambda order_item: order_item.item.price * order_item.quantity
+    format_currency = lambda price: f"{price/100:.2f}"
+    format_row = (
+        lambda list_item, price: f"{list_item.item.name}:\n\t Price: ${format_currency(list_item.item.price)} * Quantity: {list_item.quantity} = ${format_currency(price)} "
+    )
+
     print(Fore.CYAN + f"Receipt for \033[1m{customer_name}\033[0m")
     print(Fore.YELLOW + "===========================================================")
     print(Fore.WHITE + "\033[1mItems:\033[0m")
     for list_item in item_list:
-        price = list_item.item.price * list_item.quantity
-        print(
-            f"{list_item.item.name}:\n\t Price: ${list_item.item.price/100:.2f} * Quantity: {list_item.quantity} = ${price/100:.2f} "
-        )
+        price = get_price(list_item)
+        print(format_row(list_item, price))
         balance += price
     print(Fore.YELLOW + "---------------------------------------------------------")
     print(
-        Fore.WHITE + f"TOTAL BALANCE: {Fore.RED} \033[1m${balance / 100:.2f}\033[0m\n"
+        Fore.WHITE
+        + f"TOTAL BALANCE: {Fore.RED} \033[1m${format_currency(balance)}\033[0m\n"
     )
 
 
