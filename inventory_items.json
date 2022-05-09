@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Whole Milk",
+        "category": "Dairy",
+        "volume": {"unit": "Gallon", "amount": 1},
+        "price": 416
+    },
+    {
+        "name": "American Processed Cheese",
+        "category": "Dairy",
+        "volume": {"unit": "Pound", "amount": 1},
+        "price": 389
+    },
+    {
+        "name": "White Bread",
+        "category": "Bread",
+        "volume": {"unit": "Loaf", "amount": 1},
+        "price": 250
+    },
+    {
+        "name": "Lucky Charms",
+        "category": "Breakfast Cereal",
+        "volume": {"unit": "Gallon", "amount": 1},
+        "price": 1222
+    },
+    {
+        "name": "Beef Choice Angus Ribeye Steak",
+        "category": "Meat & Seafood",
+        "volume": {"unit": "Ounces", "amount": 32},
+        "price": 2270
+    }
+]
