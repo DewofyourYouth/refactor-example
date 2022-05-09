@@ -18,16 +18,15 @@ def print_receipt(customer_name: str, item_list=List[OrderRow]) -> None:
     get_price = lambda order_item: order_item.item.price * order_item.quantity
     format_currency = lambda price: f"{price/100:.2f}"
     format_row = (
-        lambda list_item: f"{list_item.item.name}:\n\t Price: ${format_currency(list_item.item.price)} * Quantity: {list_item.quantity} = ${format_currency(get_price(list_item))} "
+        lambda list_item: f"{list_item.item.name}:\n\t Price: ${format_currency(list_item.item.price)} * Quantity: {list_item.quantity} = ${format_currency(get_price(list_item))}\n"
     )
     # balance and rows
     balance = reduce(lambda a, b: a + b, map(get_price, item_list))
-    rows = "\n".join([format_row(list_item) for list_item in item_list])
     # Printing
     print(Fore.CYAN + f"Receipt for \033[1m{customer_name}\033[0m")
     print(Fore.YELLOW + "===========================================================")
     print(Fore.WHITE + "\033[1mItems:\033[0m")
-    print(rows)
+    print("".join([format_row(list_item) for list_item in item_list]))  # Print rows
     print(Fore.YELLOW + "---------------------------------------------------------")
     print(
         Fore.WHITE
