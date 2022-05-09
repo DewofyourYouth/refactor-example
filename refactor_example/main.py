@@ -28,7 +28,7 @@ def print_receipt(customer_name: str, item_list=List[OrderRow]) -> None:
     )
 
 
-if __name__ == "__main__":
+def main():
     print_receipt(
         customer_name="Joe Swanson",
         item_list=[
@@ -46,3 +46,7 @@ if __name__ == "__main__":
             OrderRow(item=inventory.MILK, quantity=3),
         ],
     )
+
+
+if __name__ == "__main__":
+    main()
