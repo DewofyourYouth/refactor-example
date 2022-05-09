@@ -22,13 +22,12 @@ def print_receipt(customer_name: str, item_list=List[OrderRow]) -> None:
     )
     # balance and rows
     balance = reduce(lambda a, b: a + b, map(get_price, item_list))
-    rows = [format_row(list_item) for list_item in item_list]
+    rows = "\n".join([format_row(list_item) for list_item in item_list])
     # Printing
     print(Fore.CYAN + f"Receipt for \033[1m{customer_name}\033[0m")
     print(Fore.YELLOW + "===========================================================")
     print(Fore.WHITE + "\033[1mItems:\033[0m")
-    for row in rows:
-        print(row)
+    print(rows)
     print(Fore.YELLOW + "---------------------------------------------------------")
     print(
         Fore.WHITE
