@@ -160,7 +160,7 @@ colorama = {version = "*", markers = "platform_system == \"Windows\""}
 name = "colorama"
 version = "0.4.4"
 description = "Cross-platform colored terminal text."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
@@ -995,7 +995,7 @@ notebook = ">=4.4.1"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "e0a7d2506bfbb649d541d7013ee58c8663caa9fbce6464b92ecfe8cea8ed2303"
+content-hash = "154b308d1c6caf955e5af81bd09c6def4b7e691b6881ad68186545ece0ee51d3"
 
 [metadata.files]
 appnope = [
