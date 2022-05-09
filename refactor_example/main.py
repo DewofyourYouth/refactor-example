@@ -38,16 +38,15 @@ def print_receipt(
     else:
         print(
             f"""<div class='receipt'>
-            <h3>Receipt for <strong>{customer_name}<strong></h3>
-            <hr>"""
+        <h3>Receipt for <strong>{customer_name}<strong></h3><hr>"""
         )
         if len(item_list) > 0:
             print(
                 """<table>
-                <thead>
-                    <tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr>
-                <thead>
-                <tbody>"""
+            <thead>
+                <tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr>
+            <thead>
+        <tbody>"""
             )
             for list_item in item_list:
                 price = list_item.item.price * list_item.quantity
@@ -57,6 +56,7 @@ def print_receipt(
                 balance += price
             print(f"</tbody></table>")
             print(f"<h4>Total: ${balance / 100:.2f}</h4>")
+        print("</div>")
 
 
 def main():
