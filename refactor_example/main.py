@@ -36,27 +36,24 @@ def print_receipt(
             + f"TOTAL BALANCE: {Fore.RED} \033[1m${balance / 100:.2f}\033[0m\n"
         )
     else:
-        print(
-            f"""<div class='receipt'>
-        <h3>Receipt for <strong>{customer_name}<strong></h3><hr>"""
+        html_str = []
+        html_str.append(
+            f"<div class='receipt'><h3>Receipt for <strong>{customer_name}<strong></h3><hr>"
         )
         if len(item_list) > 0:
-            print(
-                """<table>
-            <thead>
-                <tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr>
-            <thead>
-        <tbody>"""
+            html_str.append(
+                "<table><thead><tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr><thead><tbody>"
             )
             for list_item in item_list:
                 price = list_item.item.price * list_item.quantity
-                print(
+                html_str.append(
                     f"<tr><td>{list_item.item.name}</td><td>${list_item.item.price/100:.2f}</td><td>{list_item.quantity}</td><td></td>${price/100:.2f}</tr>"
                 )
                 balance += price
-            print(f"</tbody></table>")
-            print(f"<h4>Total: ${balance / 100:.2f}</h4>")
-        print("</div>")
+            html_str.append(f"</tbody></table>")
+            html_str.append(f"<h4>Total: ${balance / 100:.2f}</h4>")
+        html_str.append("</div>")
+        print("".join(html_str))
 
 
 def main():
