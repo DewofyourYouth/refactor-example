@@ -57,6 +57,8 @@ def print_receipt(
 
 
 def main():
+    print(Fore.BLUE + "TERMINAL RECEIPTS")
+    print("===================\n")
     print_receipt(
         customer_name="Joe Swanson",
         item_list=[
@@ -74,6 +76,8 @@ def main():
             OrderRow(item=inventory.MILK, quantity=3),
         ],
     )
+    print(Fore.BLUE + "TERMINAL RECEIPTS")
+    print("===================\n" + Fore.WHITE)
     print_receipt(
         customer_name="Peter Griffin",
         item_list=[
