@@ -2,7 +2,7 @@ from abc import ABC
 from dataclasses import dataclass
 from typing import Protocol
 
-from colorama import Fore
+from colorama import Fore  # type: ignore
 
 from refactor_example.order import Order
 from refactor_example.utils import fmt_currency
