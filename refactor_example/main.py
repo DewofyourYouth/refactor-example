@@ -4,7 +4,8 @@ from typing import List
 
 from colorama import Fore
 
-from refactor_example import inventory, utils
+from refactor_example import inventory
+from refactor_example.utils import format_currency
 
 
 @dataclass
@@ -34,52 +35,47 @@ class Order:
     def format_items_to_str(self, row_str: str) -> str:
         row_data = lambda list_item: {
             "name": list_item.item.name,
-            "price": utils.format_currency(list_item.item.price),
+            "price": format_currency(list_item.item.price),
             "quantity": list_item.quantity,
-            "total": utils.format_currency(list_item.row_price),
+            "total": format_currency(list_item.row_price),
         }
         format_row = lambda list_item: row_str.format(**row_data(list_item))
         return "".join([format_row(list_item) for list_item in self.order_items])
 
-    def print_terminal_receipt(self):
+    def generate_terminal_receipt(self):
+        print_str = []
         row_str = "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${total}\n"
-        print(Fore.CYAN + f"Receipt for \033[1m{self.customer_name}\033[0m")
-        print(
+        print_str.append(Fore.CYAN + f"Receipt for \033[1m{self.customer_name}\033[0m")
+        print_str.append(
             Fore.YELLOW + "==========================================================="
         )
-        print(Fore.WHITE + "\033[1mItems:\033[0m")
-        print(self.format_items_to_str(row_str))  # Print rows
-        print(Fore.YELLOW + "---------------------------------------------------------")
-        print(
+        print_str.append(Fore.WHITE + "\033[1mItems:\033[0m")
+        print_str.append(
+            self.format_items_to_str(row_str)
+        )  # Print_sprint_str.append rows
+        print_str.append(
+            Fore.YELLOW + "---------------------------------------------------------"
+        )
+        print_str.append(
             Fore.WHITE
-            + f"TOTAL BALANCE: {Fore.RED} \033[1m${utils.format_currency(self.balance)}\033[0m\n"
+            + f"TOTAL BALANCE: {Fore.RED} \033[1m${format_currency(self.balance)}\033[0m\n"
+        )
+        return "\n".join(print_str)
+
+    def generate_html_receipt(self):
+        title_str = f"<div class='receipt'><h3>Receipt for <strong>{self.customer_name}</strong></h3><hr>"
+        rows_str = self.format_items_to_str(
+            "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
         )
 
-    def print_html_receipt(self):
-        html_str = [
-            f"<div class='receipt'><h3>Receipt for <strong>{self.customer_name}</strong></h3><hr>",
-            f"<table><thead><tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr><thead><tbody>{self.format_items_to_str('<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>')}</tbody></table>"
+        table_str = (
+            f"<table><thead><tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr><thead><tbody>{rows_str}</tbody></table>"
             if self.order_items
-            else "",
-        ]
+            else ""
+        )
+        total_str = f"<h4>Total: ${format_currency(self.balance)}</h4></div>"
 
-        print("".join(title + table))
-
-
-# def print_html_receipt(customer_name: str, item_list=List[OrderRow]) -> None:
-#     html_str = []
-#     format_row = lambda row_dict: "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>".format(
-#         **row_dict
-#     )
-#     frs = partial(format_rows, format_row)
-
-#     html_str.append(
-#         f"<div class='receipt'><h3>Receipt for <strong>{customer_name}</strong></h3><hr>"
-#     )
-#     if len(item_list) > 0:
-#         html_str.append(frs(item_list))
-#     html_str.append("</div>")
-#     print("".join(html_str))
+        return f"{title_str}{table_str}{total_str}"
 
 
 def main():
@@ -100,8 +96,9 @@ def main():
             OrderRow(item=inventory.MILK, quantity=3),
         ],
     )
-    order0.print_terminal_receipt()
-    order1.print_terminal_receipt()
+    print(order0.generate_terminal_receipt())
+    print(order1.generate_terminal_receipt())
+    print(order0.generate_html_receipt())
 
 
 if __name__ == "__main__":
