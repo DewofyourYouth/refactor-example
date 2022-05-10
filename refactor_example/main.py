@@ -1,5 +1,8 @@
+from prompt_toolkit import HTML
+
 from refactor_example.inventory import BEEF, BREAD, CHEESE, LUCKY_CHARMS, MILK
 from refactor_example.order import Order, OrderRow
+from refactor_example.receipt_printer import HTMLReceipt, TerminalReceipt
 
 
 def sample_orders():
@@ -23,10 +26,10 @@ def sample_orders():
 
 def main():
     order0, order1 = sample_orders()
-    print(order0.generate_terminal_receipt())
-    print(order1.generate_terminal_receipt())
-    print(order0.generate_html_receipt())
-    print(order1.generate_html_receipt())
+    print(TerminalReceipt.generate_receipt_str(order0))
+    print(TerminalReceipt.generate_receipt_str(order1))
+    print(HTMLReceipt.generate_receipt_str(order0))
+    print(HTMLReceipt.generate_receipt_str(order1))
 
 
 if __name__ == "__main__":
