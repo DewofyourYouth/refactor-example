@@ -18,6 +18,14 @@ class OrderRow:
         self.row_price = self.item.price * self.quantity
 
 
+row_data = lambda list_item: {
+    "name": list_item.item.name,
+    "price": utils.format_currency(list_item.item.price),
+    "quantity": list_item.quantity,
+    "total": utils.format_currency(list_item.price),
+}
+
+
 @dataclass
 class Order:
     customer_name: str
@@ -34,11 +42,11 @@ class Order:
 
     def print_terminal_receipt(self):
         currency = utils.format_currency
-        format_row = lambda list_item: "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${row_total}\n".format(
+        format_row = lambda list_item: "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${total}\n".format(
             name=list_item.item.name,
             price=currency(list_item.item.price),
             quantity=list_item.quantity,
-            row_total=list_item.row_price,
+            total=list_item.row_price,
         )
         print(Fore.CYAN + f"Receipt for \033[1m{self.customer_name}\033[0m")
         print(
