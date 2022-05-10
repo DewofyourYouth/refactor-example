@@ -26,6 +26,7 @@ def main():
     print(order0.generate_terminal_receipt())
     print(order1.generate_terminal_receipt())
     print(order0.generate_html_receipt())
+    print(order1.generate_html_receipt())
 
 
 if __name__ == "__main__":

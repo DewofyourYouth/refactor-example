@@ -87,6 +87,6 @@ class Order:
             if self.order_items
             else ""
         )
-        total_str = f"<h4>Total: ${format_currency(self.balance)}</h4></div>"
+        total_str = f"<h4>Total: ${format_currency(self.balance)}</h4></div>\n"
 
         return f"{title_str}{table_str}{total_str}"
