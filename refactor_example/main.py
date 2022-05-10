@@ -50,7 +50,7 @@ def print_receipt(
                     f"<tr><td>{list_item.item.name}</td><td>${list_item.item.price/100:.2f}</td><td>{list_item.quantity}</td><td></td>${price/100:.2f}</tr>"
                 )
                 balance += price
-            html_str.append(f"</tbody></table>")
+            html_str.append("</tbody></table>")
             html_str.append(f"<h4>Total: ${balance / 100:.2f}</h4>")
         html_str.append("</div>")
         print("".join(html_str))
