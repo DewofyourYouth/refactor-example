@@ -1,6 +1,6 @@
 from refactor_example import inventory
 from refactor_example.order import Order, OrderRow
-from refactor_example.receipt_printer import HTMLReceipt, format_items_to_str
+from refactor_example.receipt_formatter import HTMLReceipt, format_items_to_str
 
 order0 = Order(
     customer_name="Peter Griffin",

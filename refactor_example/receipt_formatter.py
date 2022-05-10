@@ -7,6 +7,8 @@ from colorama import Fore
 from refactor_example.order import Order
 from refactor_example.utils import fmt_currency
 
+# This pattern is overkill here, but is useful for more complex branching logic
+
 
 def format_items_to_str(order: Order, row_str: str) -> str:
     row_data = lambda list_item: {
@@ -59,9 +61,7 @@ class TerminalReceipt:
             + "===========================================================\n"
         )
         print_str.append(Fore.WHITE + "\033[1mItems:\033[0m")
-        print_str.append(
-            format_items_to_str(order, cls.ROW_STRING)
-        )  # Print_sprint_str.append rows
+        print_str.append(format_items_to_str(order, cls.ROW_STRING))
         print_str.append(
             Fore.YELLOW + "---------------------------------------------------------"
         )

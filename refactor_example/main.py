@@ -2,7 +2,11 @@ from prompt_toolkit import HTML
 
 from refactor_example.inventory import BEEF, BREAD, CHEESE, LUCKY_CHARMS, MILK
 from refactor_example.order import Order, OrderRow
-from refactor_example.receipt_printer import HTMLReceipt, TerminalReceipt
+from refactor_example.receipt_formatter import (
+    HTMLReceipt,
+    ReceiptFormatter,
+    TerminalReceipt,
+)
 
 
 def sample_orders():
@@ -24,12 +28,16 @@ def sample_orders():
     )
 
 
+def print_order(receipt_formatter: ReceiptFormatter, order: Order) -> None:
+    print(receipt_formatter.generate_receipt_str(order))
+
+
 def main():
     order0, order1 = sample_orders()
-    print(TerminalReceipt.generate_receipt_str(order0))
-    print(TerminalReceipt.generate_receipt_str(order1))
-    print(HTMLReceipt.generate_receipt_str(order0))
-    print(HTMLReceipt.generate_receipt_str(order1))
+    print_order(TerminalReceipt, order0)
+    print_order(TerminalReceipt, order1)
+    print_order(HTMLReceipt, order0)
+    print_order(HTMLReceipt, order1)
 
 
 if __name__ == "__main__":
