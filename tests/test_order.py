@@ -1,4 +1,4 @@
-from refactor_example.main import Order, OrderRow, inventory
+from refactor_example.order import Order, OrderRow, inventory
 
 
 def test_order_row_price():
