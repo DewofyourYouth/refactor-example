@@ -40,7 +40,8 @@ class Order:
 
     def update_balance(self):
         self.balance = reduce(
-            lambda a, b: a + b, [row.row_price for row in self.order_items]
+            lambda a, b: a + b,
+            [row.row_price for row in self.order_items],
         )
 
     def add_row_to_order(self, row: OrderRow) -> None:
