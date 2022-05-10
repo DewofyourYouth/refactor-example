@@ -65,6 +65,7 @@ class Order:
                 self.format_items_to_str(
                     "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
                 ),
+                "</tbody></table>",
             ]
         print("".join(title + table))
 
