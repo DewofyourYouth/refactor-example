@@ -44,16 +44,6 @@ class Order:
             [row.row_price for row in self.order_items],
         )
 
-    def add_row_to_order(self, row: OrderRow) -> None:
-        self.order_items.append(row)
-        self.update_balance()
-
-    def remove_row_from_order(self, item_name: str) -> None:
-        ...
-
-    def increment_row_quantity(self, item_name: str) -> None:
-        ...
-
     def format_items_to_str(self, row_str: str) -> str:
         row_data = lambda list_item: {
             "name": list_item.item.name,
