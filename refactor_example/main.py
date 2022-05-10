@@ -41,6 +41,7 @@ def print_header(receipt_type: str):
 
 def main():
     order0, order1 = sample_orders()
+
     print_header("TERMINAL")
     print_order(TerminalReceipt, order0)
     print_order(TerminalReceipt, order1)
