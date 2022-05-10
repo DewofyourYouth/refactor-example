@@ -1,32 +1,37 @@
 [
-    {
-        "name": "Whole Milk",
-        "category": "Dairy",
-        "volume": {"unit": "Gallon", "amount": 1},
-        "price": 416
-    },
-    {
-        "name": "American Processed Cheese",
-        "category": "Dairy",
-        "volume": {"unit": "Pound", "amount": 1},
-        "price": 389
-    },
-    {
-        "name": "White Bread",
-        "category": "Bread",
-        "volume": {"unit": "Loaf", "amount": 1},
-        "price": 250
-    },
-    {
-        "name": "Lucky Charms",
-        "category": "Breakfast Cereal",
-        "volume": {"unit": "Gallon", "amount": 1},
-        "price": 1222
-    },
-    {
-        "name": "Beef Choice Angus Ribeye Steak",
-        "category": "Meat & Seafood",
-        "volume": {"unit": "Ounces", "amount": 32},
-        "price": 2270
-    }
+  {
+    "itemId": "fe865a93-cdee-4d6d-9716-97d2afdf7b7c",
+    "name": "Whole Milk",
+    "category": "Dairy",
+    "volume": { "unit": "Gallon", "amount": 1 },
+    "price": 416
+  },
+  {
+    "itemId": "8efdbf5e-40cb-42f8-899a-22f7cfa32679",
+    "name": "American Processed Cheese",
+    "category": "Dairy",
+    "volume": { "unit": "Pound", "amount": 1 },
+    "price": 389
+  },
+  {
+    "itemId": "3a291734-3320-406e-84f9-b230f135f636",
+    "name": "White Bread",
+    "category": "Bread",
+    "volume": { "unit": "Loaf", "amount": 1 },
+    "price": 250
+  },
+  {
+    "itemId": "b286e9d7-6e24-452d-9608-1de4422d6ee3",
+    "name": "Lucky Charms",
+    "category": "Breakfast Cereal",
+    "volume": { "unit": "Gallon", "amount": 1 },
+    "price": 1222
+  },
+  {
+    "itemId": "660e0b0e-546f-4392-8943-2d7e73942100",
+    "name": "Beef Choice Angus Ribeye Steak",
+    "category": "Meat & Seafood",
+    "volume": { "unit": "Ounces", "amount": 32 },
+    "price": 2270
+  }
 ]

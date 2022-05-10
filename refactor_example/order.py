@@ -50,6 +50,9 @@ class Order:
     def remove_row_from_order(self, item_name: str) -> None:
         ...
 
+    def increment_row_quantity(self, item_name: str) -> None:
+        ...
+
     def format_items_to_str(self, row_str: str) -> str:
         row_data = lambda list_item: {
             "name": list_item.item.name,

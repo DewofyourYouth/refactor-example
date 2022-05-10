@@ -10,6 +10,7 @@ class Measurement:
 
 @dataclass
 class InventoryItem:
+    item_id: str
     name: str
     price: int
     category: str
@@ -18,6 +19,7 @@ class InventoryItem:
     @classmethod
     def from_json(cls, j_dict: dict):
         return InventoryItem(
+            item_id=j_dict["itemId"],
             name=j_dict["name"],
             category=j_dict["category"],
             price=j_dict["price"],
@@ -27,12 +29,12 @@ class InventoryItem:
         )
 
 
-def load_inventory_items():
-    with open("inventory_items.json") as f:
+def load_inventory_items_from_file(json_file: str):
+    with open(json_file) as f:
         data = json.load(f)
         return [InventoryItem.from_json(d) for d in data]
 
 
-MILK, CHEESE, BREAD, LUCKY_CHARMS, BEEF = load_inventory_items()
-
-# %%
+MILK, CHEESE, BREAD, LUCKY_CHARMS, BEEF = load_inventory_items_from_file(
+    "inventory_items.json"
+)
