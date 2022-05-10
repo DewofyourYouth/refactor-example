@@ -1,6 +1,5 @@
 from dataclasses import dataclass, field
 from functools import reduce
-from locale import currency
 from typing import List
 
 from colorama import Fore
@@ -18,14 +17,6 @@ class OrderRow:
         self.row_price = self.item.price * self.quantity
 
 
-row_data = lambda list_item: {
-    "name": list_item.item.name,
-    "price": utils.format_currency(list_item.item.price),
-    "quantity": list_item.quantity,
-    "total": utils.format_currency(list_item.price),
-}
-
-
 @dataclass
 class Order:
     customer_name: str
@@ -40,22 +31,24 @@ class Order:
             lambda a, b: a + b, [row.row_price for row in self.order_items]
         )
 
+    def format_items_to_str(self, row_str: str) -> str:
+        row_data = lambda list_item: {
+            "name": list_item.item.name,
+            "price": utils.format_currency(list_item.item.price),
+            "quantity": list_item.quantity,
+            "total": utils.format_currency(list_item.row_price),
+        }
+        format_row = lambda list_item: row_str.format(**row_data(list_item))
+        return "".join([format_row(list_item) for list_item in self.order_items])
+
     def print_terminal_receipt(self):
-        currency = utils.format_currency
-        format_row = lambda list_item: "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${total}\n".format(
-            name=list_item.item.name,
-            price=currency(list_item.item.price),
-            quantity=list_item.quantity,
-            total=list_item.row_price,
-        )
+        row_str = "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${total}\n"
         print(Fore.CYAN + f"Receipt for \033[1m{self.customer_name}\033[0m")
         print(
             Fore.YELLOW + "==========================================================="
         )
         print(Fore.WHITE + "\033[1mItems:\033[0m")
-        print(
-            "".join([format_row(list_item) for list_item in self.order_items])
-        )  # Print rows
+        print(self.format_items_to_str(row_str))  # Print rows
         print(Fore.YELLOW + "---------------------------------------------------------")
         print(
             Fore.WHITE
