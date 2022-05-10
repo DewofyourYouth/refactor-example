@@ -43,11 +43,13 @@ class Order:
         return "".join([format_row(list_item) for list_item in self.order_items])
 
     def generate_terminal_receipt(self):
-        print_str = []
+        print_str = [
+            "\n" + Fore.CYAN + f"Receipt for \033[1m{self.customer_name}\033[0m"
+        ]
         row_str = "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${total}\n"
-        print_str.append(Fore.CYAN + f"Receipt for \033[1m{self.customer_name}\033[0m")
         print_str.append(
-            Fore.YELLOW + "==========================================================="
+            Fore.YELLOW
+            + "===========================================================\n"
         )
         print_str.append(Fore.WHITE + "\033[1mItems:\033[0m")
         print_str.append(
