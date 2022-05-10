@@ -59,9 +59,14 @@ class Order:
         title = [
             f"<div class='receipt'><h3>Receipt for <strong>{self.customer_name}</strong></h3><hr>"
         ]
-        rows = self.format_items_to_str(
-            "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
-        )
+        if self.order_items:
+            table = [
+                "<table><thead><tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr><thead><tbody>",
+                self.format_items_to_str(
+                    "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
+                ),
+            ]
+        print("".join(title + table))
 
 
 # def print_html_receipt(customer_name: str, item_list=List[OrderRow]) -> None:
