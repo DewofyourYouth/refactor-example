@@ -1,4 +1,3 @@
-from abc import ABC
 from dataclasses import dataclass
 from typing import Protocol
 
@@ -29,12 +28,15 @@ class ReceiptFormatter(Protocol):
 
 @dataclass
 class HTMLReceipt:
+    """A ReceiptFormatter for HTML"""
+
     ROW_STR = (
         "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
     )
 
     @classmethod
     def generate_receipt_str(cls, order: Order) -> str:
+        """Returns a receipt in the form of an HTML string"""
         title_str = f"<div class='receipt'><h3>Receipt for <strong>{order.customer_name}</strong></h3><hr>"
         rows_str = format_items_to_str(order, cls.ROW_STR)
 
@@ -49,10 +51,13 @@ class HTMLReceipt:
 
 @dataclass
 class TerminalReceipt:
+    """A ReceiptFormatter for a command line interface"""
+
     ROW_STRING = "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${total}\n"
 
     @classmethod
     def generate_receipt_str(cls, order: Order) -> str:
+        """Returns a receipt formatted as a string for a terminal application"""
         print_str = [
             "\n" + Fore.CYAN + f"Receipt for \033[1m{order.customer_name}\033[0m"
         ]

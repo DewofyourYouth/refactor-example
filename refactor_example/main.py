@@ -1,5 +1,3 @@
-from prompt_toolkit import HTML
-
 from refactor_example.inventory import BEEF, BREAD, CHEESE, LUCKY_CHARMS, MILK
 from refactor_example.order import Order, OrderRow
 from refactor_example.receipt_formatter import (
