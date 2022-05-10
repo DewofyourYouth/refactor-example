@@ -75,7 +75,7 @@ def main():
             OrderRow(item=inventory.MILK, quantity=3),
         ],
     )
-    print(Fore.BLUE + "TERMINAL RECEIPTS")
+    print(Fore.BLUE + "HTML RECEIPTS")
     print("===================\n" + Fore.WHITE)
     print_receipt(
         customer_name="Peter Griffin",
