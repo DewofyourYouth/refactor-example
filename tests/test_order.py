@@ -28,7 +28,6 @@ order1 = Order(
 
 
 def test_order_balace():
-
     assert order0.balance == 8955
     assert order1.balance == 1471
 

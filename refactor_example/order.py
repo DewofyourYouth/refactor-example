@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from functools import reduce
 from typing import List
 
 from colorama import Fore
@@ -39,10 +38,7 @@ class Order:
         self.update_balance()
 
     def update_balance(self):
-        self.balance = reduce(
-            lambda a, b: a + b,
-            [row.row_price for row in self.order_items],
-        )
+        self.balance = sum([row.row_price for row in self.order_items])
 
     def format_items_to_str(self, row_str: str) -> str:
         row_data = lambda list_item: {
