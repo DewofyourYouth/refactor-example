@@ -55,6 +55,30 @@ class Order:
             + f"TOTAL BALANCE: {Fore.RED} \033[1m${utils.format_currency(self.balance)}\033[0m\n"
         )
 
+    def print_html_receipt(self):
+        title = [
+            f"<div class='receipt'><h3>Receipt for <strong>{self.customer_name}</strong></h3><hr>"
+        ]
+        rows = self.format_items_to_str(
+            "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
+        )
+
+
+# def print_html_receipt(customer_name: str, item_list=List[OrderRow]) -> None:
+#     html_str = []
+#     format_row = lambda row_dict: "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>".format(
+#         **row_dict
+#     )
+#     frs = partial(format_rows, format_row)
+
+#     html_str.append(
+#         f"<div class='receipt'><h3>Receipt for <strong>{customer_name}</strong></h3><hr>"
+#     )
+#     if len(item_list) > 0:
+#         html_str.append(frs(item_list))
+#     html_str.append("</div>")
+#     print("".join(html_str))
+
 
 def main():
     order0 = Order(
