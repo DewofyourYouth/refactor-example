@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from functools import reduce
+from locale import currency
 from typing import List
 
 from colorama import Fore
@@ -31,9 +32,13 @@ class Order:
             lambda a, b: a + b, [row.row_price for row in self.order_items]
         )
 
-    def print_receipt(self):
-        format_row = (
-            lambda list_item: f"{list_item.item.name}:\n\t Price: ${utils.format_currency(list_item.item.price)} * Quantity: {list_item.quantity} = ${utils.format_currency(list_item.row_price)}\n"
+    def print_terminal_receipt(self):
+        currency = utils.format_currency
+        format_row = lambda list_item: "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${row_total}\n".format(
+            name=list_item.item.name,
+            price=currency(list_item.item.price),
+            quantity=list_item.quantity,
+            row_total=list_item.row_price,
         )
         print(Fore.CYAN + f"Receipt for \033[1m{self.customer_name}\033[0m")
         print(
@@ -68,8 +73,8 @@ def main():
             OrderRow(item=inventory.MILK, quantity=3),
         ],
     )
-    order0.print_receipt()
-    order1.print_receipt()
+    order0.print_terminal_receipt()
+    order1.print_terminal_receipt()
 
 
 if __name__ == "__main__":
