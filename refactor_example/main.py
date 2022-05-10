@@ -44,6 +44,7 @@ def main():
     print_header("TERMINAL")
     print_order(TerminalReceipt, order0)
     print_order(TerminalReceipt, order1)
+
     print_header("HTML")
     print_order(HTMLReceipt, order0)
     print_order(HTMLReceipt, order1)
