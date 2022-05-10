@@ -28,7 +28,7 @@ def sample_orders():
     )
 
 
-def print_order(receipt_formatter: ReceiptFormatter, order: Order) -> None:
+def print_formatted_order(receipt_formatter: ReceiptFormatter, order: Order) -> None:
     print(receipt_formatter.generate_receipt_str(order))
 
 
@@ -43,12 +43,12 @@ def main():
     order0, order1 = sample_orders()
 
     print_header("TERMINAL")
-    print_order(TerminalReceipt, order0)
-    print_order(TerminalReceipt, order1)
+    print_formatted_order(TerminalReceipt, order0)
+    print_formatted_order(TerminalReceipt, order1)
 
     print_header("HTML")
-    print_order(HTMLReceipt, order0)
-    print_order(HTMLReceipt, order1)
+    print_formatted_order(HTMLReceipt, order0)
+    print_formatted_order(HTMLReceipt, order1)
 
 
 if __name__ == "__main__":
