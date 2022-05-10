@@ -42,7 +42,7 @@ class Order:
         format_row = lambda list_item: row_str.format(**row_data(list_item))
         return "".join([format_row(list_item) for list_item in self.order_items])
 
-    def generate_terminal_receipt(self):
+    def generate_terminal_receipt(self) -> str:
         print_str = [
             "\n" + Fore.CYAN + f"Receipt for \033[1m{self.customer_name}\033[0m"
         ]
@@ -64,7 +64,7 @@ class Order:
         )
         return "\n".join(print_str)
 
-    def generate_html_receipt(self):
+    def generate_html_receipt(self) -> str:
         title_str = f"<div class='receipt'><h3>Receipt for <strong>{self.customer_name}</strong></h3><hr>"
         rows_str = self.format_items_to_str(
             "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
