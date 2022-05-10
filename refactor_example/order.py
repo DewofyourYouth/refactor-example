@@ -42,13 +42,3 @@ class Order:
 
     def update_balance(self: O):
         self.balance = sum([row.row_price for row in self.order_items])
-
-    def format_items_to_str(self: O, row_str: str) -> str:
-        row_data = lambda list_item: {
-            "name": list_item.item.name,
-            "price": fmt_currency(list_item.item.price),
-            "quantity": list_item.quantity,
-            "total": fmt_currency(list_item.row_price),
-        }
-        format_row = lambda list_item: row_str.format(**row_data(list_item))
-        return "".join([format_row(list_item) for list_item in self.order_items])
