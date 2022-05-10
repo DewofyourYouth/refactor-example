@@ -56,17 +56,13 @@ class Order:
         )
 
     def print_html_receipt(self):
-        title = [
-            f"<div class='receipt'><h3>Receipt for <strong>{self.customer_name}</strong></h3><hr>"
+        html_str = [
+            f"<div class='receipt'><h3>Receipt for <strong>{self.customer_name}</strong></h3><hr>",
+            f"<table><thead><tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr><thead><tbody>{self.format_items_to_str('<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>')}</tbody></table>"
+            if self.order_items
+            else "",
         ]
-        if self.order_items:
-            table = [
-                "<table><thead><tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr><thead><tbody>",
-                self.format_items_to_str(
-                    "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
-                ),
-                "</tbody></table>",
-            ]
+
         print("".join(title + table))
 
 
