@@ -783,7 +783,7 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xm
 name = "pytest-it"
 version = "0.1.4"
 description = "Pytest plugin to display test reports as a plaintext spec, inspired by Rspec: https://github.com/mattduck/pytest-it."
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -1003,7 +1003,7 @@ notebook = ">=4.4.1"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "7b8f711d750dafcbfad7ee3546eb6189446c760379411de181b3cfef4d7e9366"
+content-hash = "97d6b89a3fc301645627c4ff8e857dc43af259de7b5910709ef41bb52bc6d992"
 
 [metadata.files]
 appnope = [
