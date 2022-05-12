@@ -1,12 +1,16 @@
-from pytest import mark
+from uuid import UUID
+
 import pytest
+from pytest import mark
+from refactor_example.inventory import MILK
 from refactor_example.main import sample_orders
+from refactor_example.orders.order import Order, OrderRow
 from refactor_example.orders.output.receipt_formatter import (
     HTMLReceipt,
+    JSONAPIReceipt,
     TerminalReceipt,
     format_items_to_str,
 )
-
 
 joe, peter, glenn = sample_orders()
 
@@ -75,3 +79,45 @@ class TestTerminalReceipt:
     def test_items_list(self):
         row_str = "Beef Choice Angus Ribeye Steak:\n\t Price: $22.70 * Quantity: 2 = $45.40\nLucky Charms:\n\t Price: $12.22 * Quantity: 1 = $12.22\n"
         assert row_str in self.peter_str
+
+
+@mark.describe("Test API Receipt class")
+class TestAPIReceipt:
+    @mark.it("Serialize order takes an order and returns a JSON serializable dict")
+    def test_serialize_order(self):
+        order0 = Order(
+            order_id=UUID("9f4c1013-a793-42ba-89a3-dacf2b52fdb0"),
+            customer_name="Jerry Falwell",
+            order_items=[OrderRow(MILK, 1)],
+        )
+        assert MILK.price == 416
+        assert JSONAPIReceipt._serialize_order(order0) == {
+            "order_id": "9f4c1013-a793-42ba-89a3-dacf2b52fdb0",
+            "customer_name": "Jerry Falwell",
+            "order_items": [
+                {
+                    "item": {
+                        "item_id": "fe865a93-cdee-4d6d-9716-97d2afdf7b7c",
+                        "name": "Whole Milk",
+                        "price": 4.16,
+                        "category": "Dairy",
+                        "volume": {"unit": "Gallon", "amount": 1},
+                    },
+                    "quantity": 1,
+                    "row_price": 4.16,
+                }
+            ],
+            "balance": 4.16,
+        }
+
+    @mark.it("APIReceipt.generate_receipt_str returns a JSON serialized string")
+    def test_api_receipt_returns_json(self):
+        order0 = Order(
+            order_id=UUID("9f4c1013-a793-42ba-89a3-dacf2b52fdb0"),
+            customer_name="Jerry Falwell",
+            order_items=[OrderRow(MILK, 1)],
+        )
+        assert (
+            JSONAPIReceipt.generate_receipt_str(order0)
+            == '{"order_id": "9f4c1013-a793-42ba-89a3-dacf2b52fdb0", "customer_name": "Jerry Falwell", "order_items": [{"item": {"item_id": "fe865a93-cdee-4d6d-9716-97d2afdf7b7c", "name": "Whole Milk", "price": 4.16, "category": "Dairy", "volume": {"unit": "Gallon", "amount": 1}}, "quantity": 1, "row_price": 4.16}], "balance": 4.16}'
+        )

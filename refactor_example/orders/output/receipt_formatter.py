@@ -1,14 +1,12 @@
+import copy
+import json
 from dataclasses import dataclass
 from typing import Protocol
 
-from refactor_example.orders.output.utils import (
-    TERMINAL_COLORS as color,
-    TERMINAL_FORMAT as tf,
-    fmt_currency as fc,
-)
-
 from refactor_example.orders.order import Order
-
+from refactor_example.orders.output.utils import TERMINAL_COLORS as color
+from refactor_example.orders.output.utils import TERMINAL_FORMAT as tf
+from refactor_example.orders.output.utils import fmt_currency as fc
 
 # This pattern is overkill here, but is useful for more complex branching logic
 
@@ -77,3 +75,30 @@ class TerminalReceipt:
             f"{color.WHITE}TOTAL BALANCE: {color.RED} {tf.S_BOLD}${fc(order.balance)}{tf.E_BOLD}\n"
         )
         return "\n".join(print_str)
+
+
+class JSONAPIReceipt:
+    """A ReceiptFormatter for the receipt API"""
+
+    @staticmethod
+    def _serialize_order(order: Order) -> dict:
+        f = lambda x: float(fc(x))
+        json_order_items = [row.__dict__ for row in order.order_items]
+        order_clone = copy.deepcopy(order)
+        # Serialize all non serializable stuff
+        for i, row in enumerate(json_order_items):
+            o = order_clone.order_items[i]
+            row["item"] = o.item.__dict__
+            row["row_price"] = f(o.row_price)
+            row["item"]["volume"] = o.item.volume.__dict__
+            row["item"]["price"] = f(o.item.price)
+        json_order = order.__dict__
+        json_order["order_id"] = str(order.order_id)
+        json_order["order_items"] = json_order_items
+        json_order["balance"] = f(order.balance)
+        return json_order
+
+    @classmethod
+    def generate_receipt_str(cls, order: Order) -> str:
+        json_order = cls._serialize_order(order)
+        return json.dumps(json_order)

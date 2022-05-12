@@ -1,4 +1,5 @@
-from refactor_example.orders.output.utils import TERMINAL_COLORS as color
+import uuid
+
 from refactor_example.inventory import BEEF, BREAD, CHEESE, LUCKY_CHARMS, MILK
 from refactor_example.orders.order import Order, OrderRow
 from refactor_example.orders.output.receipt_formatter import (
@@ -6,11 +7,13 @@ from refactor_example.orders.output.receipt_formatter import (
     ReceiptFormatter,
     TerminalReceipt,
 )
+from refactor_example.orders.output.utils import TERMINAL_COLORS as color
 
 
 def sample_orders():
     return (
         Order(
+            order_id=uuid.uuid4(),
             customer_name="Joe Swanson",
             order_items=[
                 OrderRow(item=MILK, quantity=2),
@@ -19,6 +22,7 @@ def sample_orders():
             ],
         ),
         Order(
+            order_id=uuid.uuid4(),
             customer_name="Peter Griffin",
             order_items=[
                 OrderRow(item=BEEF, quantity=2),
@@ -27,7 +31,7 @@ def sample_orders():
                 OrderRow(item=MILK, quantity=3),
             ],
         ),
-        Order(customer_name="Glenn Quagmire", order_items=[]),
+        Order(order_id=uuid.uuid4(), customer_name="Glenn Quagmire", order_items=[]),
     )
 
 
