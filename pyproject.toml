@@ -9,7 +9,7 @@ python = "^3.9"
 colorama = "^0.4.4"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^7.1.2"
 black = {version = "^22.3.0", allow-prereleases = true}
 ipykernel = "^6.13.0"
 jupyter = "^1.0.0"
