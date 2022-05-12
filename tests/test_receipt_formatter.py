@@ -1,4 +1,3 @@
-from colorama import Fore
 from pytest import mark
 import pytest
 from refactor_example.main import sample_orders
@@ -34,7 +33,7 @@ class TestFormatItemsToStr:
             )
 
 
-@mark.describe("Test HTMLReceipt class")
+@mark.describe("Test HTML Receipt class")
 class TestHTMLReceipt:
     @mark.it("HTMLReceipt.generate_receipt_str returns the order formatted as HTML")
     def test_generate_html_receipt(self):
@@ -50,7 +49,9 @@ class TestHTMLReceipt:
         html = HTMLReceipt.generate_receipt_str(glenn).strip()
         assert "<table" not in html
 
-    @mark.it("HTMLReceipt.generate_receipt_str on an empty orderis formatted properly.")
+    @mark.it(
+        "HTML Receipt.generate_receipt_str on an empty orderis formatted properly."
+    )
     def test_empty_order_html_formatted_properly(self):
         html = HTMLReceipt.generate_receipt_str(glenn).strip()
         assert (
@@ -59,7 +60,7 @@ class TestHTMLReceipt:
         )
 
 
-@mark.describe("Test the TerminalReceipt class")
+@mark.describe("Test the Terminal Receipt class")
 class TestTerminalReceipt:
     glenn_str = TerminalReceipt.generate_receipt_str(glenn)
     peter_str = TerminalReceipt.generate_receipt_str(peter)

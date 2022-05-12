@@ -5,7 +5,7 @@ from pytest import mark
 joe, peter, glenn = sample_orders()
 
 
-@mark.describe("Test OrderRow class methods")
+@mark.describe("Test Order Row class methods")
 class TestOrderRow:
     @mark.it("OrderRow.row_price is the price of the row.")
     def test_order_row_price(self):
@@ -22,6 +22,14 @@ class TestOrderRow:
         joe_milk.increment_quantity()
         assert joe_milk.quantity == 3
         assert joe_milk.row_price == 1248
+
+    @mark.it("OrderRow.decrement_quantity decreases the quantity and row price")
+    def test_decrement_quantity(self):
+        joe_milk = joe.order_items[0]
+        assert joe_milk.quantity == 3
+        joe_milk.decrement_quantity(2)
+        assert joe_milk.quantity == 1
+        assert joe_milk.row_price == 416
 
 
 @mark.describe("Test Order class methods")

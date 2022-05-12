@@ -35,14 +35,14 @@ def print_formatted_order(receipt_formatter: ReceiptFormatter, order: Order) -> 
     print(receipt_formatter.generate_receipt_str(order))
 
 
-def print_header(receipt_type: str):
+def print_header(receipt_type: str) -> None:
     print(f"\n {color.BLUE} {receipt_type} RECEIPTS")
     print(
         f"================================================================================ {color.WHITE}"
     )
 
 
-def main():
+def main() -> None:
     print_header("TERMINAL")
     for order in sample_orders():
         print_formatted_order(TerminalReceipt, order)

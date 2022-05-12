@@ -26,9 +26,9 @@ class OrderRow:
         return self
 
     def decrement_quantity(self: OR, amount: int = 1) -> OR:
-        t = self.quantity - amount
-        self.quantity = t if t >= 0 else self.quantity
-        self._update_row_price()
+        if self.quantity - amount >= 0:
+            self.quantity -= amount
+            self._update_row_price()
         return self
 
 
