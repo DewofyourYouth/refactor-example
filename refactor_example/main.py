@@ -44,8 +44,6 @@ def print_header(receipt_type: str):
 
 
 def main():
-    joe, peter, glenn = sample_orders()
-
     print_header("TERMINAL")
     for order in sample_orders():
         print_formatted_order(TerminalReceipt, order)
