@@ -1,10 +1,14 @@
 from dataclasses import dataclass
 from typing import Protocol
 
-from colorama import Fore  # type: ignore
+from refactor_example.utils import (
+    TERMINAL_COLORS as color,
+    TERMINAL_FORMAT as tf,
+    fmt_currency as fc,
+)
 
 from refactor_example.order import Order
-from refactor_example.utils import fmt_currency
+
 
 # This pattern is overkill here, but is useful for more complex branching logic
 
@@ -12,9 +16,9 @@ from refactor_example.utils import fmt_currency
 def format_items_to_str(order: Order, row_str: str) -> str:
     row_data = lambda list_item: {
         "name": list_item.item.name,
-        "price": fmt_currency(list_item.item.price),
+        "price": fc(list_item.item.price),
         "quantity": list_item.quantity,
-        "total": fmt_currency(list_item.row_price),
+        "total": fc(list_item.row_price),
     }
     format_row = lambda list_item: row_str.format(**row_data(list_item))
     return "".join([format_row(list_item) for list_item in order.order_items])
@@ -45,7 +49,7 @@ class HTMLReceipt:
             if order.order_items
             else ""
         )
-        total_str = f"<h4>Total: ${fmt_currency(order.balance)}</h4></div>\n"
+        total_str = f"<h4>Total: ${fc(order.balance)}</h4></div>\n"
         return f"{title_str}{table_str}{total_str}"
 
 
@@ -59,19 +63,17 @@ class TerminalReceipt:
     def generate_receipt_str(cls, order: Order) -> str:
         """Returns a receipt formatted as a string for a terminal application"""
         print_str = [
-            "\n" + Fore.CYAN + f"Receipt for \033[1m{order.customer_name}\033[0m"
+            f"\n{color.CYAN}Receipt for {tf.S_BOLD}{order.customer_name}{tf.E_BOLD}"
         ]
         print_str.append(
-            Fore.YELLOW
-            + "===========================================================\n"
+            f"{color.YELLOW}===========================================================\n"
         )
-        print_str.append(Fore.WHITE + "\033[1mItems:\033[0m")
+        print_str.append(f"{color.WHITE}{tf.S_BOLD}Items:{tf.E_BOLD}")
         print_str.append(format_items_to_str(order, cls.ROW_STRING))
         print_str.append(
-            Fore.YELLOW + "---------------------------------------------------------"
+            f"{color.YELLOW}---------------------------------------------------------"
         )
         print_str.append(
-            Fore.WHITE
-            + f"TOTAL BALANCE: {Fore.RED} \033[1m${fmt_currency(order.balance)}\033[0m\n"
+            f"{color.WHITE}TOTAL BALANCE: {color.RED} {tf.S_BOLD}${fc(order.balance)}{tf.E_BOLD}\n"
         )
         return "\n".join(print_str)

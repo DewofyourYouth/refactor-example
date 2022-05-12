@@ -1,5 +1,4 @@
-from colorama import Fore  # type: ignore
-
+from refactor_example.utils import TERMINAL_COLORS as color
 from refactor_example.inventory import BEEF, BREAD, CHEESE, LUCKY_CHARMS, MILK
 from refactor_example.order import Order, OrderRow
 from refactor_example.receipt_formatter import (
@@ -37,9 +36,9 @@ def print_formatted_order(receipt_formatter: ReceiptFormatter, order: Order) -> 
 
 
 def print_header(receipt_type: str):
-    print(f"\n {Fore.BLUE} {receipt_type} RECEIPTS")
+    print(f"\n {color.BLUE} {receipt_type} RECEIPTS")
     print(
-        f"================================================================================ {Fore.WHITE}"
+        f"================================================================================ {color.WHITE}"
     )
 
 
