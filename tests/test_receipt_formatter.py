@@ -39,10 +39,12 @@ class TestFormatItemsToStr:
 
 @mark.describe("Test HTML Receipt class")
 class TestHTMLReceipt:
+    hr = HTMLReceipt()
+
     @mark.it("HTMLReceipt.generate_receipt_str returns the order formatted as HTML")
     def test_generate_html_receipt(self):
         assert (
-            HTMLReceipt.generate_receipt_str(joe).strip()
+            self.hr.generate_receipt_str(joe).strip()
             == "<div class='receipt'><h3>Receipt for <strong>Joe Swanson</strong></h3><hr><table><thead><tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr><thead><tbody><tr><td>Whole Milk</td><td>$4.16</td><td>2</td><td></td>$8.32</tr><tr><td>White Bread</td><td>$2.50</td><td>1</td><td></td>$2.50</tr><tr><td>American Processed Cheese</td><td>$3.89</td><td>1</td><td></td>$3.89</tr></tbody></table><h4>Total: $14.71</h4></div>"
         )
 
@@ -50,14 +52,14 @@ class TestHTMLReceipt:
         "HTMLReceipt.generate_receipt_str on an empty order does not contain a table."
     )
     def test_empty_order_html_does_not_contain_table(self):
-        html = HTMLReceipt.generate_receipt_str(glenn).strip()
+        html = self.hr.generate_receipt_str(glenn).strip()
         assert "<table" not in html
 
     @mark.it(
         "HTML Receipt.generate_receipt_str on an empty orderis formatted properly."
     )
     def test_empty_order_html_formatted_properly(self):
-        html = HTMLReceipt.generate_receipt_str(glenn).strip()
+        html = self.hr.generate_receipt_str(glenn).strip()
         assert (
             html
             == "<div class='receipt'><h3>Receipt for <strong>Glenn Quagmire</strong></h3><hr><h4>Total: $0.00</h4></div>".strip()
@@ -66,8 +68,9 @@ class TestHTMLReceipt:
 
 @mark.describe("Test the Terminal Receipt class")
 class TestTerminalReceipt:
-    glenn_str = TerminalReceipt.generate_receipt_str(glenn)
-    peter_str = TerminalReceipt.generate_receipt_str(peter)
+    tr = TerminalReceipt()
+    glenn_str = tr.generate_receipt_str(order=glenn)
+    peter_str = tr.generate_receipt_str(peter)
 
     @mark.it("The receipt title is properly formatted")
     def test_terminal_receipt_title(self):
@@ -83,6 +86,8 @@ class TestTerminalReceipt:
 
 @mark.describe("Test API Receipt class")
 class TestAPIReceipt:
+    jr = JSONAPIReceipt()
+
     @mark.it("Serialize order takes an order and returns a JSON serializable dict")
     def test_serialize_order(self):
         order0 = Order(
@@ -91,7 +96,7 @@ class TestAPIReceipt:
             order_items=[OrderRow(MILK, 1)],
         )
         assert MILK.price == 416
-        assert JSONAPIReceipt._serialize_order(order0) == {
+        assert self.jr._serialize_order(order0) == {
             "order_id": "9f4c1013-a793-42ba-89a3-dacf2b52fdb0",
             "customer_name": "Jerry Falwell",
             "order_items": [
@@ -118,6 +123,6 @@ class TestAPIReceipt:
             order_items=[OrderRow(MILK, 1)],
         )
         assert (
-            JSONAPIReceipt.generate_receipt_str(order0)
+            self.jr.generate_receipt_str(order0)
             == '{"order_id": "9f4c1013-a793-42ba-89a3-dacf2b52fdb0", "customer_name": "Jerry Falwell", "order_items": [{"item": {"item_id": "fe865a93-cdee-4d6d-9716-97d2afdf7b7c", "name": "Whole Milk", "price": 4.16, "category": "Dairy", "volume": {"unit": "Gallon", "amount": 1}}, "quantity": 1, "row_price": 4.16}], "balance": 4.16}'
         )

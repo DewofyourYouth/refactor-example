@@ -1,4 +1,5 @@
 import uuid
+from distutils.util import rfc822_escape
 
 from refactor_example.inventory import BEEF, BREAD, CHEESE, LUCKY_CHARMS, MILK
 from refactor_example.orders.order import Order, OrderRow
@@ -35,8 +36,8 @@ def sample_orders():
     )
 
 
-def print_formatted_order(receipt_formatter: ReceiptFormatter, order: Order) -> None:
-    print(receipt_formatter.generate_receipt_str(order))
+def print_formatted_order(rf: ReceiptFormatter, order: Order) -> None:
+    print(rf.generate_receipt_str(order))
 
 
 def print_header(receipt_type: str) -> None:
@@ -49,11 +50,13 @@ def print_header(receipt_type: str) -> None:
 def main() -> None:
     print_header("TERMINAL")
     for order in sample_orders():
-        print_formatted_order(TerminalReceipt, order)
+        tr = TerminalReceipt()
+        print_formatted_order(tr, order)
 
     print_header("HTML")
     for order in sample_orders():
-        print_formatted_order(HTMLReceipt, order)
+        hr = HTMLReceipt()
+        print_formatted_order(hr, order)
 
 
 if __name__ == "__main__":
