@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 import json
 
-# Measurement
+
 @dataclass
 class Measurement:
     unit: str
