@@ -1,4 +1,5 @@
 from refactor_example.inventory import *
+from pytest import mark
 
 milk = {
     "itemId": "fe865a93-cdee-4d6d-9716-97d2afdf7b7c",
@@ -9,16 +10,22 @@ milk = {
 }
 
 
-def test_load_inventory_item():
-    assert InventoryItem.from_json(milk) == InventoryItem(
-        item_id="fe865a93-cdee-4d6d-9716-97d2afdf7b7c",
-        name="Whole Milk",
-        price=416,
-        category="Dairy",
-        volume=Measurement(unit="Gallon", amount=1),
-    )
+@mark.describe("Test InventoryItem class")
+class TestInventoryItem:
+    @mark.it("InventoryItem.from_json takes a dict and returns an inventory item")
+    def test_load_inventory_item(self):
+        assert InventoryItem.from_json(milk) == InventoryItem(
+            item_id="fe865a93-cdee-4d6d-9716-97d2afdf7b7c",
+            name="Whole Milk",
+            price=416,
+            category="Dairy",
+            volume=Measurement(unit="Gallon", amount=1),
+        )
 
 
+@mark.it(
+    "test_load_inventory_items_from_file can load InventoryItems from a json file."
+)
 def test_load_inventory_items_from_file():
     assert load_inventory_items_from_file("inventory_items.json") == [
         InventoryItem(
