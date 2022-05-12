@@ -1,4 +1,3 @@
-from refactor_example.orders.output.utils import TERMINAL_COLORS as color
 from refactor_example.inventory import BEEF, BREAD, CHEESE, LUCKY_CHARMS, MILK
 from refactor_example.orders.order import Order, OrderRow
 from refactor_example.orders.output.receipt_formatter import (
@@ -6,6 +5,7 @@ from refactor_example.orders.output.receipt_formatter import (
     ReceiptFormatter,
     TerminalReceipt,
 )
+from refactor_example.orders.output.utils import TERMINAL_COLORS as color
 
 
 def sample_orders():
