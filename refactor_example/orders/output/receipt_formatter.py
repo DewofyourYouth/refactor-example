@@ -1,14 +1,10 @@
 from dataclasses import dataclass
 from typing import Protocol
 
-from refactor_example.orders.output.utils import (
-    TERMINAL_COLORS as color,
-    TERMINAL_FORMAT as tf,
-    fmt_currency as fc,
-)
-
 from refactor_example.orders.order import Order
-
+from refactor_example.orders.output.utils import TERMINAL_COLORS as color
+from refactor_example.orders.output.utils import TERMINAL_FORMAT as tf
+from refactor_example.orders.output.utils import fmt_currency as fc
 
 # This pattern is overkill here, but is useful for more complex branching logic
 
@@ -25,8 +21,7 @@ def format_items_to_str(order: Order, row_str: str) -> str:
 
 
 class ReceiptFormatter(Protocol):
-    @classmethod
-    def generate_receipt_str(cls, order: Order) -> str:
+    def generate_receipt_str(self, order: Order) -> str:
         """Outputs a receipt as a formatted string"""
 
 
@@ -38,11 +33,10 @@ class HTMLReceipt:
         "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
     )
 
-    @classmethod
-    def generate_receipt_str(cls, order: Order) -> str:
+    def generate_receipt_str(self, order: Order) -> str:
         """Returns a receipt in the form of an HTML string"""
         title_str = f"<div class='receipt'><h3>Receipt for <strong>{order.customer_name}</strong></h3><hr>"
-        rows_str = format_items_to_str(order, cls.ROW_STR)
+        rows_str = format_items_to_str(order, self.ROW_STR)
 
         table_str = (
             f"<table><thead><tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr><thead><tbody>{rows_str}</tbody></table>"
@@ -59,8 +53,7 @@ class TerminalReceipt:
 
     ROW_STRING = "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${total}\n"
 
-    @classmethod
-    def generate_receipt_str(cls, order: Order) -> str:
+    def generate_receipt_str(self, order: Order) -> str:
         """Returns a receipt formatted as a string for a terminal application"""
         print_str = [
             f"\n{color.CYAN}Receipt for {tf.S_BOLD}{order.customer_name}{tf.E_BOLD}"
@@ -69,7 +62,7 @@ class TerminalReceipt:
             f"{color.YELLOW}===========================================================\n"
         )
         print_str.append(f"{color.WHITE}{tf.S_BOLD}Items:{tf.E_BOLD}")
-        print_str.append(format_items_to_str(order, cls.ROW_STRING))
+        print_str.append(format_items_to_str(order, self.ROW_STRING))
         print_str.append(
             f"{color.YELLOW}---------------------------------------------------------"
         )
