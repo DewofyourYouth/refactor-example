@@ -8,7 +8,7 @@ authors = ["jshore_ironscales <jshore@ironscales.com>"]
 python = "^3.9"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^7.1.2"
 black = {version = "^22.3.0", allow-prereleases = true}
 ipykernel = "^6.13.0"
 jupyter = "^1.0.0"
@@ -16,8 +16,10 @@ mypy = "^0.950"
 pytest-it = "^0.1.4"
 pytest-cov = "^3.0.0"
 
+[tool.poetry.scripts]
+testing = "scripts:testing"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
 
