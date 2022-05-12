@@ -10,21 +10,25 @@ from refactor_example.receipt_formatter import (
 
 
 def sample_orders():
-    return Order(
-        customer_name="Joe Swanson",
-        order_items=[
-            OrderRow(item=MILK, quantity=2),
-            OrderRow(item=BREAD, quantity=1),
-            OrderRow(item=CHEESE),
-        ],
-    ), Order(
-        customer_name="Peter Griffin",
-        order_items=[
-            OrderRow(item=BEEF, quantity=2),
-            OrderRow(item=LUCKY_CHARMS),
-            OrderRow(item=CHEESE, quantity=5),
-            OrderRow(item=MILK, quantity=3),
-        ],
+    return (
+        Order(
+            customer_name="Joe Swanson",
+            order_items=[
+                OrderRow(item=MILK, quantity=2),
+                OrderRow(item=BREAD, quantity=1),
+                OrderRow(item=CHEESE),
+            ],
+        ),
+        Order(
+            customer_name="Peter Griffin",
+            order_items=[
+                OrderRow(item=BEEF, quantity=2),
+                OrderRow(item=LUCKY_CHARMS),
+                OrderRow(item=CHEESE, quantity=5),
+                OrderRow(item=MILK, quantity=3),
+            ],
+        ),
+        Order(customer_name="Glenn Quagmire", order_items=[]),
     )
 
 
@@ -40,15 +44,15 @@ def print_header(receipt_type: str):
 
 
 def main():
-    order0, order1 = sample_orders()
+    joe, peter, glenn = sample_orders()
 
     print_header("TERMINAL")
-    print_formatted_order(TerminalReceipt, order0)
-    print_formatted_order(TerminalReceipt, order1)
+    for order in sample_orders():
+        print_formatted_order(TerminalReceipt, order)
 
     print_header("HTML")
-    print_formatted_order(HTMLReceipt, order0)
-    print_formatted_order(HTMLReceipt, order1)
+    for order in sample_orders():
+        print_formatted_order(HTMLReceipt, order)
 
 
 if __name__ == "__main__":
