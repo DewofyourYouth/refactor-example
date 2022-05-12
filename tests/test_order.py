@@ -1,4 +1,4 @@
-from refactor_example.order import Order, OrderRow, inventory
+from refactor_example.orders.order import Order, OrderRow, inventory
 from refactor_example.main import sample_orders
 from pytest import mark
 

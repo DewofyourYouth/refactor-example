@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import List, TypeVar
 
 from refactor_example import inventory
-from refactor_example.utils import fmt_currency
+from refactor_example.orders.output.utils import fmt_currency
 
 OR = TypeVar("OR", bound="OrderRow")
 O = TypeVar("O", bound="Order")

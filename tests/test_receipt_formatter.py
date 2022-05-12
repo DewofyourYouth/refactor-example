@@ -1,7 +1,7 @@
 from pytest import mark
 import pytest
 from refactor_example.main import sample_orders
-from refactor_example.receipt_formatter import (
+from refactor_example.orders.output.receipt_formatter import (
     HTMLReceipt,
     TerminalReceipt,
     format_items_to_str,

@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from typing import Protocol
 
-from refactor_example.utils import (
+from refactor_example.orders.output.utils import (
     TERMINAL_COLORS as color,
     TERMINAL_FORMAT as tf,
     fmt_currency as fc,
 )
 
-from refactor_example.order import Order
+from refactor_example.orders.order import Order
 
 
 # This pattern is overkill here, but is useful for more complex branching logic
