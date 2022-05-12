@@ -15,19 +15,20 @@ class OrderRow:
     row_price: int = field(init=False)
 
     def __post_init__(self):
-        self.update_row_price()
+        self._update_row_price()
 
-    def update_row_price(self: OR):
+    def _update_row_price(self: OR):
         self.row_price = self.item.price * self.quantity
 
     def increment_quantity(self: OR, amount: int = 1) -> OR:
         self.quantity += amount
-        self.update_row_price()
+        self._update_row_price()
         return self
 
     def decrement_quantity(self: OR, amount: int = 1) -> OR:
         t = self.quantity - amount
         self.quantity = t if t >= 0 else self.quantity
+        self._update_row_price()
         return self
 
 
@@ -38,7 +39,7 @@ class Order:
     balance: int = field(init=False)
 
     def __post_init__(self: O):
-        self.update_balance()
+        self._update_balance()
 
-    def update_balance(self: O):
+    def _update_balance(self: O):
         self.balance = sum([row.row_price for row in self.order_items])

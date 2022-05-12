@@ -1,3 +1,4 @@
+from pytest import mark
 from refactor_example import inventory
 from refactor_example.order import Order, OrderRow
 from refactor_example.receipt_formatter import HTMLReceipt, format_items_to_str
@@ -21,6 +22,7 @@ order1 = Order(
 )
 
 
+@mark.it("format_items_to_str for")
 def test_format_item_to_str():
     assert format_items_to_str(
         order0, "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${total}\n"
