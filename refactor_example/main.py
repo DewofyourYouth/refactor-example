@@ -45,11 +45,11 @@ def print_header(receipt_type: str) -> None:
 def main() -> None:
     print_header("TERMINAL")
     for order in sample_orders():
-        print_formatted_order(TerminalReceipt, order)
+        print_formatted_order(TerminalReceipt(), order)
 
     print_header("HTML")
     for order in sample_orders():
-        print_formatted_order(HTMLReceipt, order)
+        print_formatted_order(HTMLReceipt(), order)
 
 
 if __name__ == "__main__":
