@@ -21,7 +21,13 @@ def orders():
 
 @app.route("/receipt/<string:order_id>")
 def receipt(order_id):
-    pass
+    order_data = sample_orders_dict.get(order_id)
+    if not order_data:
+        return {
+            "message": f"We couldn't find an order with an order_id of '{order_id}'."
+        }, 404
+
+    return order_data
 
 
 if __name__ == "__main__":
