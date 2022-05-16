@@ -68,3 +68,9 @@ class TestCallableReceiptFormatters:
             html
             == "<div class='receipt'><h3>Receipt for <strong>Glenn Quagmire</strong></h3><hr><h4>Total: $0.00</h4></div>".strip()
         )
+
+    @mark.it("format_terminal_receipt on an empty order is formatted properly.")
+    def test_format_terminal_receipt_on_empty_order(self):
+        t = format_terminal_reciept(glenn)
+        assert "Order bda60c77-3547-4d05-89b3-801f2eca2548 has no items." in t
+        assert "Items" not in t

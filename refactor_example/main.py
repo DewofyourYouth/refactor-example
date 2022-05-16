@@ -51,7 +51,7 @@ def main() -> None:  # pragma: no cover
 
     print_header("HTML")
     for order in sample_orders():
-        print(format_html_receipt(order))
+        print(format_html_receipt(order) + "\n")
 
 
 if __name__ == "__main__":
