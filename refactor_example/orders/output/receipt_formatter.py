@@ -22,9 +22,34 @@ def format_items_to_str(order: Order, row_str: str) -> str:
     return "".join([format_row(list_item) for list_item in order.order_items])
 
 
+class ReceiptStringFormatter(Protocol):
+    def __call__(self, order: Order) -> str:
+        ...
+
+
 class ReceiptFormatter(Protocol):
     def generate_receipt_str(self, order: Order) -> str:
         """Outputs a receipt as a formatted string"""
+
+
+def format_html_receipt(order: Order) -> str:
+    row_str = (
+        "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
+    )
+    title_str = f"<div class='receipt'><h3>Receipt for <strong>{order.customer_name}</strong></h3><hr>"
+    rows_str = format_items_to_str(order, row_str)
+
+    table_str = (
+        f"<table><thead><tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr><thead><tbody>{rows_str}</tbody></table>"
+        if order.order_items
+        else ""
+    )
+    total_str = f"<h4>Total: ${fc(order.balance)}</h4></div>\n"
+    return f"{title_str}{table_str}{total_str}"
+
+
+def format_terminal_reciept(order: Order) -> str:
+    pass
 
 
 @dataclass

@@ -1,14 +1,18 @@
 from flask import Flask
 from refactor_example.main import sample_orders
+from refactor_example.orders.output.receipt_formatter import JSONAPIReceipt
 
 app = Flask(__name__)
+
+sample_orders = {
+    order.order_id: JSONAPIReceipt()._serialize_order(order)
+    for order in sample_orders()
+}
 
 
 @app.route("/orders")
 def orders():
-    # return {order.order_id: order for order in sample_orders()}
-    api_formatter = API
-    return tuple(sample_orders())
+    return sample_orders
 
 
 @app.route("/receipt/<string:order_id>")
