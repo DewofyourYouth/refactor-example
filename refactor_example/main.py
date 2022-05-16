@@ -44,7 +44,7 @@ def print_header(receipt_type: str) -> None:
     )
 
 
-def main() -> None:
+def main() -> None:  # pragma: no cover
     print_header("TERMINAL")
     for order in sample_orders():
         print(format_terminal_reciept(order))
