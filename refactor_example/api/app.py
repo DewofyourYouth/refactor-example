@@ -9,6 +9,11 @@ sample_orders_dict: dict[str, dict] = {
 }
 
 
+@app.route("/")
+def smoke_test():
+    return {"message": "The app is running!"}
+
+
 @app.route("/orders")
 def orders():
     return sample_orders_dict

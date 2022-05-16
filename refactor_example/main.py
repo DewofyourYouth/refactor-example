@@ -11,7 +11,7 @@ from refactor_example.orders.output.utils import TERMINAL_COLORS as color
 def sample_orders():  # pragma: no cover
     return (
         Order(
-            order_id="09d37df9-48a1-4746-91fb-1bcd125a4ed5",
+            order_id="682c52a0-110a-4fc9-9bed-2392c5cab72a",
             customer_name="Joe Swanson",
             order_items=[
                 OrderRow(item=MILK, quantity=2),
