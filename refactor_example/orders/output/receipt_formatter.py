@@ -64,18 +64,15 @@ def format_html_receipt(order: Order) -> str:
 def format_terminal_reciept(order: Order) -> str:
     row_str = "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${total}\n"
 
-    print_str = [
-        f"\n{color.CYAN}Receipt for {tf.S_BOLD}{order.customer_name}{tf.E_BOLD}"
-    ]
-    print_str.append(
-        f"{color.YELLOW}===========================================================\n"
+    table = (
+        f"{color.WHITE}{tf.S_BOLD}Items:{tf.E_BOLD} {format_items_to_str(order, row_str)}"
+        if len(order.order_items) > 0
+        else f"Order {order.order_id} has no items.\n"
     )
-    print_str.append(f"{color.WHITE}{tf.S_BOLD}Items:{tf.E_BOLD}")
-    print_str.append(format_items_to_str(order, row_str))
-    print_str.append(
-        f"{color.YELLOW}---------------------------------------------------------"
+    return (
+        f"\n{color.CYAN}Receipt for {tf.S_BOLD}{order.customer_name}{tf.E_BOLD}\n"
+        + f"{color.YELLOW}===========================================================\n"
+        + table
+        + f"{color.YELLOW}---------------------------------------------------------\n"
+        + f"{color.WHITE}TOTAL BALANCE: {color.RED} {tf.S_BOLD}${fc(order.balance)}{tf.E_BOLD}\n"
     )
-    print_str.append(
-        f"{color.WHITE}TOTAL BALANCE: {color.RED} {tf.S_BOLD}${fc(order.balance)}{tf.E_BOLD}\n"
-    )
-    return "\n".join(print_str)

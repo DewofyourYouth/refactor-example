@@ -50,7 +50,7 @@ class TestCallableReceiptFormatters:
             == "<div class='receipt'><h3>Receipt for <strong>Joe Swanson</strong></h3><hr><table><thead><tr><th>Item Name</th><th>Price</th><th>Quantity</th><th>Total</th></tr><thead><tbody><tr><td>Whole Milk</td><td>$4.16</td><td>2</td><td></td>$8.32</tr><tr><td>White Bread</td><td>$2.50</td><td>1</td><td></td>$2.50</tr><tr><td>American Processed Cheese</td><td>$3.89</td><td>1</td><td></td>$3.89</tr></tbody></table><h4>Total: $14.71</h4></div>"
         )
 
-    @mark.it("THe callable terminal formatter works")
+    @mark.it("The callable terminal formatter works")
     def test_callable_terminal_formatter(self):
         assert format_terminal_reciept(glenn).startswith(
             "\n\x1b[36mReceipt for \033[1mGlenn Quagmire\033[0m\n\x1b[33m===========================================================\n"

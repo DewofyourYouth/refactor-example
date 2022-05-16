@@ -8,7 +8,7 @@ from refactor_example.orders.output.receipt_formatter import (
 from refactor_example.orders.output.utils import TERMINAL_COLORS as color
 
 
-def sample_orders():
+def sample_orders():  # pragma: no cover
     return (
         Order(
             order_id="09d37df9-48a1-4746-91fb-1bcd125a4ed5",
@@ -37,10 +37,6 @@ def sample_orders():
     )
 
 
-def print_formatted_order(rf: ReceiptFormatter, order: Order) -> None:
-    print(rf(order))
-
-
 def print_header(receipt_type: str) -> None:
     print(f"\n {color.BLUE} {receipt_type} RECEIPTS")
     print(
@@ -51,11 +47,11 @@ def print_header(receipt_type: str) -> None:
 def main() -> None:
     print_header("TERMINAL")
     for order in sample_orders():
-        print_formatted_order(format_terminal_reciept, order)
+        print(format_terminal_reciept(order))
 
     print_header("HTML")
     for order in sample_orders():
-        print_formatted_order(format_html_receipt, order)
+        print(format_html_receipt(order))
 
 
 if __name__ == "__main__":
