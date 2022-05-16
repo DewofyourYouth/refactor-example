@@ -1,12 +1,11 @@
 from flask import Flask
 from refactor_example.main import sample_orders
-from refactor_example.orders.output.receipt_formatter import JSONAPIReceipt
+from refactor_example.orders.output.receipt_formatter import format_api_receipt
 
 app = Flask(__name__)
 
 sample_orders_dict: dict[str, dict] = {
-    order.order_id: JSONAPIReceipt()._serialize_order(order)
-    for order in sample_orders()
+    order.order_id: format_api_receipt(order) for order in sample_orders()
 }
 
 

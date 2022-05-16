@@ -1,9 +1,9 @@
 from refactor_example.inventory import BEEF, BREAD, CHEESE, LUCKY_CHARMS, MILK
 from refactor_example.orders.order import Order, OrderRow
 from refactor_example.orders.output.receipt_formatter import (
-    HTMLReceipt,
     ReceiptFormatter,
-    TerminalReceipt,
+    format_html_receipt,
+    format_terminal_reciept,
 )
 from refactor_example.orders.output.utils import TERMINAL_COLORS as color
 
@@ -38,7 +38,7 @@ def sample_orders():
 
 
 def print_formatted_order(rf: ReceiptFormatter, order: Order) -> None:
-    print(rf.generate_receipt_str(order))
+    print(rf(order))
 
 
 def print_header(receipt_type: str) -> None:
@@ -51,11 +51,11 @@ def print_header(receipt_type: str) -> None:
 def main() -> None:
     print_header("TERMINAL")
     for order in sample_orders():
-        print_formatted_order(TerminalReceipt(), order)
+        print_formatted_order(format_terminal_reciept, order)
 
     print_header("HTML")
     for order in sample_orders():
-        print_formatted_order(HTMLReceipt(), order)
+        print_formatted_order(format_html_receipt, order)
 
 
 if __name__ == "__main__":
