@@ -1,7 +1,3 @@
-from pydoc import describe
-from uuid import UUID
-
-import pytest
 from pytest import mark
 from refactor_example.inventory import MILK
 from refactor_example.main import sample_orders
