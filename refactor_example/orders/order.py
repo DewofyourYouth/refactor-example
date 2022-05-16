@@ -35,7 +35,7 @@ class OrderRow:
 
 @dataclass
 class Order:
-    order_id: str
+    order_id: uuid.UUID
     customer_name: str
     order_items: List[OrderRow]
     balance: int = field(init=False)

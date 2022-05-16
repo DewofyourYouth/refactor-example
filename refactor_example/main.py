@@ -1,5 +1,3 @@
-import uuid
-
 from refactor_example.inventory import BEEF, BREAD, CHEESE, LUCKY_CHARMS, MILK
 from refactor_example.orders.order import Order, OrderRow
 from refactor_example.orders.output.receipt_formatter import (

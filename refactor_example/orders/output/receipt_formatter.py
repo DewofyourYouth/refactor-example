@@ -1,3 +1,5 @@
+import copy
+import json
 from dataclasses import dataclass
 from typing import Protocol
 
@@ -35,6 +37,7 @@ class HTMLReceipt:
 
     def generate_receipt_str(self, order: Order) -> str:
         """Returns a receipt in the form of an HTML string"""
+        ROW_STR = "<tr><td>{name}</td><td>${price}</td><td>{quantity}</td><td></td>${total}</tr>"
         title_str = f"<div class='receipt'><h3>Receipt for <strong>{order.customer_name}</strong></h3><hr>"
         rows_str = format_items_to_str(order, self.ROW_STR)
 
@@ -70,3 +73,29 @@ class TerminalReceipt:
             f"{color.WHITE}TOTAL BALANCE: {color.RED} {tf.S_BOLD}${fc(order.balance)}{tf.E_BOLD}\n"
         )
         return "\n".join(print_str)
+
+
+class JSONAPIReceipt:
+    """A ReceiptFormatter for the receipt API"""
+
+    @staticmethod
+    def _serialize_order(order: Order) -> dict:
+        f = lambda x: float(fc(x))
+        json_order_items = [row.__dict__ for row in order.order_items]
+        order_clone = copy.deepcopy(order)
+        # Serialize all non serializable stuff
+        for i, row in enumerate(json_order_items):
+            o = order_clone.order_items[i]
+            row["item"] = o.item.__dict__
+            row["row_price"] = f(o.row_price)
+            row["item"]["volume"] = o.item.volume.__dict__
+            row["item"]["price"] = f(o.item.price)
+        json_order = order.__dict__
+        json_order["order_id"] = str(order.order_id)
+        json_order["order_items"] = json_order_items
+        json_order["balance"] = f(order.balance)
+        return json_order
+
+    def generate_receipt_str(self, order: Order) -> str:
+        json_order = self._serialize_order(order)
+        return json.dumps(json_order)
