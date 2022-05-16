@@ -1,3 +1,4 @@
+import uuid
 from dataclasses import dataclass, field
 from typing import List, TypeVar
 
@@ -34,6 +35,7 @@ class OrderRow:
 
 @dataclass
 class Order:
+    order_id: str
     customer_name: str
     order_items: List[OrderRow]
     balance: int = field(init=False)
