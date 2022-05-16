@@ -4,7 +4,7 @@ from refactor_example.orders.output.receipt_formatter import JSONAPIReceipt
 
 app = Flask(__name__)
 
-sample_orders = {
+sample_orders_dict: dict[str, dict] = {
     order.order_id: JSONAPIReceipt()._serialize_order(order)
     for order in sample_orders()
 }
@@ -12,7 +12,7 @@ sample_orders = {
 
 @app.route("/orders")
 def orders():
-    return sample_orders
+    return sample_orders_dict
 
 
 @app.route("/receipt/<string:order_id>")
