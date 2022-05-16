@@ -1,14 +1,10 @@
 import copy
-import json
-from dataclasses import dataclass
 from typing import Protocol
 
 from refactor_example.orders.order import Order
 from refactor_example.orders.output.utils import TERMINAL_COLORS as color
 from refactor_example.orders.output.utils import TERMINAL_FORMAT as tf
 from refactor_example.orders.output.utils import fmt_currency as fc
-
-# This pattern is overkill here, but is useful for more complex branching logic
 
 
 def format_items_to_str(order: Order, row_str: str) -> str:
@@ -39,7 +35,7 @@ def format_api_receipt(order: Order) -> dict:
         row["item"]["volume"] = o.item.volume.__dict__
         row["item"]["price"] = format_to_float(o.item.price)
     json_order = order.__dict__
-    json_order["order_id"] = str(order.order_id)
+    json_order["order_id"] = str(order.order_id)  # this is not needed
     json_order["order_items"] = json_order_items
     json_order["balance"] = format_to_float(order.balance)
     return json_order
