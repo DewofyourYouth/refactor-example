@@ -1,6 +1,5 @@
 import json
 
-import pytest
 from flask.testing import FlaskClient
 from pytest import mark
 from refactor_example.api.app import app
