@@ -3,7 +3,7 @@ from refactor_example.orders.order import Order, OrderRow
 from refactor_example.orders.output.receipt_formatter import (
     ReceiptFormatter,
     format_html_receipt,
-    format_terminal_reciept,
+    format_terminal_receipt,
 )
 from refactor_example.orders.output.utils import TERMINAL_COLORS as color
 
@@ -44,14 +44,19 @@ def print_header(receipt_type: str) -> None:
     )
 
 
+def print_receipt(receipt_formatter: ReceiptFormatter, order: Order) -> None:
+    print(receipt_formatter(order))
+
+
 def main() -> None:  # pragma: no cover
     print_header("TERMINAL")
     for order in sample_orders():
-        print(format_terminal_reciept(order))
+        print_receipt(format_terminal_receipt, order)
 
     print_header("HTML")
     for order in sample_orders():
-        print(format_html_receipt(order) + "\n")
+        print_receipt(format_html_receipt, order)
+        print("\n")
 
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ from refactor_example.orders.order import Order, OrderRow
 from refactor_example.orders.output.receipt_formatter import (
     format_api_receipt,
     format_html_receipt,
-    format_terminal_reciept,
+    format_terminal_receipt,
 )
 
 joe, peter, glenn = sample_orders()
@@ -48,7 +48,7 @@ class TestCallableReceiptFormatters:
 
     @mark.it("The callable terminal formatter works")
     def test_callable_terminal_formatter(self):
-        assert format_terminal_reciept(glenn).startswith(
+        assert format_terminal_receipt(glenn).startswith(
             "\n\x1b[36mReceipt for \033[1mGlenn Quagmire\033[0m\n\x1b[33m===========================================================\n"
         )
 
@@ -67,6 +67,6 @@ class TestCallableReceiptFormatters:
 
     @mark.it("format_terminal_receipt on an empty order is formatted properly.")
     def test_format_terminal_receipt_on_empty_order(self):
-        t = format_terminal_reciept(glenn)
+        t = format_terminal_receipt(glenn)
         assert "Order bda60c77-3547-4d05-89b3-801f2eca2548 has no items." in t
         assert "Items" not in t

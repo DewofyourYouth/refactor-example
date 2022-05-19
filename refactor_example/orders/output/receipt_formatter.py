@@ -57,7 +57,7 @@ def format_html_receipt(order: Order) -> str:
     return f"{title_str}{table_str}{total_str}"
 
 
-def format_terminal_reciept(order: Order) -> str:
+def format_terminal_receipt(order: Order) -> str:
     row_str = "{name}:\n\t Price: ${price} * Quantity: {quantity} = ${total}\n"
 
     table = (
