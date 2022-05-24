@@ -1,6 +1,5 @@
 import copy
 import json
-from dataclasses import dataclass
 from typing import Protocol
 
 from refactor_example.orders.order import Order
@@ -27,7 +26,6 @@ class ReceiptFormatter(Protocol):
         """Generates a receipts as a formatted string."""
 
 
-@dataclass
 class HTMLReceipt:
     """A ReceiptFormatter for HTML"""
 
@@ -46,7 +44,6 @@ class HTMLReceipt:
         return f"{title_str}{table_str}{total_str}"
 
 
-@dataclass
 class TerminalReceipt:
     """A ReceiptFormatter for a command line interface"""
 
