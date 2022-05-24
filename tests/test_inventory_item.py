@@ -23,9 +23,7 @@ class TestInventoryItem:
         )
 
 
-@mark.it(
-    "test_load_inventory_items_from_file can load InventoryItems from a json file."
-)
+@mark.it("load_inventory_items_from_file can load InventoryItems from a json file.")
 def test_load_inventory_items_from_file():
     assert load_inventory_items_from_file("inventory_items.json") == [
         InventoryItem(
