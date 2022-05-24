@@ -11,9 +11,9 @@ from refactor_example.orders.output.receipt_formatter import (
 joe, peter, glenn = sample_orders()
 
 
-@mark.describe("Tests for callable receipt formatters")
+@mark.describe("Tests for receipt formatters")
 class TestCallableReceiptFormatters:
-    @mark.it("The callable API formatter works")
+    @mark.it("The API formatter works")
     def test_callable_api_formatter(self):
         order0 = Order(
             order_id="9f4c1013-a793-42ba-89a3-dacf2b52fdb0",
@@ -39,7 +39,7 @@ class TestCallableReceiptFormatters:
             "balance": 4.16,
         }
 
-    @mark.it("The callable HTML formatter works")
+    @mark.it("The HTML formatter works")
     def test_callable_html_formatter(self):
         assert (
             format_html_receipt(joe)

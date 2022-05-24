@@ -21,7 +21,7 @@ def orders():
 
 @app.route("/receipt/<string:order_id>")
 def receipt(order_id):
-    pass
+    raise NotImplementedError()
 
 
 if __name__ == "__main__":
