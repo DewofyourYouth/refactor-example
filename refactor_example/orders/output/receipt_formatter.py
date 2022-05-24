@@ -25,7 +25,6 @@ class ReceiptFormatter(Protocol):
         """Outputs a receipt as a formatted string"""
 
 
-@dataclass
 class HTMLReceipt:
     """A ReceiptFormatter for HTML"""
 
@@ -47,7 +46,6 @@ class HTMLReceipt:
         return f"{title_str}{table_str}{total_str}"
 
 
-@dataclass
 class TerminalReceipt:
     """A ReceiptFormatter for a command line interface"""
 
