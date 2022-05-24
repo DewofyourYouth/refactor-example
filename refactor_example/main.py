@@ -1,5 +1,4 @@
 import uuid
-from distutils.util import rfc822_escape
 
 from refactor_example.inventory import BEEF, BREAD, CHEESE, LUCKY_CHARMS, MILK
 from refactor_example.orders.order import Order, OrderRow
