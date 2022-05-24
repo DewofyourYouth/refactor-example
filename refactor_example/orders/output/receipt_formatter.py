@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import Protocol
 
 from refactor_example.orders.order import Order
