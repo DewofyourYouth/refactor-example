@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List
 
-from colorama import Fore
+from colorama import Fore  # type: ignore
 
 from refactor_example import inventory
 from refactor_example.utils import format_currency
