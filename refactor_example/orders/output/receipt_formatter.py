@@ -20,7 +20,7 @@ def format_items_to_str(order: Order, row_str: str) -> str:
 
 class ReceiptFormatter(Protocol):
     def __call__(self, order: Order) -> str | dict:
-        """Outputs a receipt as a formatted string"""
+        """Outputs a receipt as a formatted string or JSON serializable dict"""
 
 
 def format_api_receipt(order: Order) -> dict:
