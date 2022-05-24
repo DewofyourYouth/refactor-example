@@ -31,8 +31,8 @@ def sample_orders():
     )
 
 
-def print_formatted_order(receipt_formatter: ReceiptFormatter, order: Order) -> None:
-    print(receipt_formatter.generate_receipt_str(order))
+def print_formatted_order(rf: ReceiptFormatter, order: Order) -> None:
+    print(rf.generate_receipt_str(order))
 
 
 def print_header(receipt_type: str) -> None:
