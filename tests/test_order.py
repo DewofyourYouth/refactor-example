@@ -33,7 +33,9 @@ class TestOrder:
             "Beef Choice Angus Ribeye Steak:\n\t Price: $22.70 * Quantity: 2 = $45.40\n\nLucky Charms"
         )
 
-    @mark.it("Order.for_to_str with an invalid placeholder name returns a KeyError.")
+    @mark.it(
+        "Order.format_items_to_str with an invalid placeholder name returns a KeyError."
+    )
     def test_invalid_str(self):
         with pytest.raises(KeyError, match="item_name"):
             peter.format_items_to_str(
