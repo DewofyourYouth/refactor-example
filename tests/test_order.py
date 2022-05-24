@@ -34,7 +34,7 @@ class TestOrderRow:
 
 @mark.describe("Test Order class methods")
 class TestOrder:
-    @mark.it("Order.balance is the sum of price of all the rows in the order")
+    @mark.it("Order.balance is the sum of prices of all the rows in the order")
     def test_order_balace(self):
         assert peter.balance == 8955
         assert joe.balance == 1471
