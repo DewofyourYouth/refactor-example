@@ -5,7 +5,7 @@ from pytest import mark
 joe, peter, glenn = sample_orders()
 
 
-@mark.describe("Test Order Row class methods")
+@mark.describe("An Order Row is a class for holding data about products in an order.")
 class TestOrderRow:
     @mark.it("OrderRow.row_price is the price of the row.")
     def test_order_row_price(self):
@@ -32,7 +32,7 @@ class TestOrderRow:
         assert joe_milk.row_price == 416
 
 
-@mark.describe("Test Order class methods")
+@mark.describe("An Order is a the itemized record of a transaction.")
 class TestOrder:
     @mark.it("Order.balance is the sum of price of all the rows in the order")
     def test_order_balace(self):

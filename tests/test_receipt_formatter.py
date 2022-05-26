@@ -11,7 +11,7 @@ from refactor_example.orders.output.receipt_formatter import (
 joe, peter, glenn = sample_orders()
 
 
-@mark.describe("Test the format_items_to_str function")
+@mark.describe("format_item_to_str formats a list item in a receipt to a properly formatted string.")
 class TestFormatItemsToStr:
     @mark.it(
         "format_items_to_str returns a string with all the items formatted according to the input string"
@@ -33,7 +33,7 @@ class TestFormatItemsToStr:
             )
 
 
-@mark.describe("Test HTML Receipt class")
+@mark.describe("Formats an order receipt as an HTML string.")
 class TestHTMLReceipt:
     @mark.it("HTMLReceipt.generate_receipt_str returns the order formatted as HTML")
     def test_generate_html_receipt(self):
@@ -50,7 +50,7 @@ class TestHTMLReceipt:
         assert "<table" not in html
 
     @mark.it(
-        "HTML Receipt.generate_receipt_str on an empty orderis formatted properly."
+        "HTML Receipt.generate_receipt_str on an empty order is formatted properly."
     )
     def test_empty_order_html_formatted_properly(self):
         html = HTMLReceipt.generate_receipt_str(glenn).strip()
@@ -60,7 +60,7 @@ class TestHTMLReceipt:
         )
 
 
-@mark.describe("Test the Terminal Receipt class")
+@mark.describe("Formats an order to a string to printed as a receipt in the terminal.")
 class TestTerminalReceipt:
     glenn_str = TerminalReceipt.generate_receipt_str(glenn)
     peter_str = TerminalReceipt.generate_receipt_str(peter)

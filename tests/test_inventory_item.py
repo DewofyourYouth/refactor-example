@@ -10,7 +10,7 @@ milk = {
 }
 
 
-@mark.describe("Test InventoryItem class")
+@mark.describe("InventoryItem is a class for storing items available in the inventory.")
 class TestInventoryItem:
     @mark.it("InventoryItem.from_json takes a dict and returns an inventory item")
     def test_load_inventory_item(self):
