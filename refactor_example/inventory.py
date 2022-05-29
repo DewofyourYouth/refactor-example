@@ -1,4 +1,3 @@
-#%%
 from dataclasses import dataclass
 import json
 
@@ -35,5 +34,3 @@ def load_inventory_items():
 
 
 MILK, CHEESE, BREAD, LUCKY_CHARMS, BEEF = load_inventory_items()
-
-# %%
