@@ -25,5 +25,9 @@ def receipt(order_id):
     # return sample_orders_dict[order_id]
 
 
-if __name__ == "__main__":
+def main():
     app.run(debug=True)
+
+
+if __name__ == "__main__":
+    main()
