@@ -11,7 +11,9 @@ from refactor_example.orders.output.receipt_formatter import (
 joe, peter, glenn = sample_orders()
 
 
-@mark.describe("format_item_to_str formats a list item in a receipt to a properly formatted string.")
+@mark.describe(
+    "format_item_to_str formats a list item in a receipt to a properly formatted string."
+)
 class TestFormatItemsToStr:
     @mark.it(
         "format_items_to_str returns a string with all the items formatted according to the input string"
@@ -24,7 +26,9 @@ class TestFormatItemsToStr:
             "Beef Choice Angus Ribeye Steak:\n\t Price: $22.70 * Quantity: 2 = $45.40\n\nLucky Charms"
         )
 
-    @mark.it("Order.for_to_str with an invalid placeholder name returns a KeyError.")
+    @mark.it(
+        "Order.format_items_to_str with an invalid placeholder name returns a KeyError."
+    )
     def test_invalid_str(self):
         with pytest.raises(KeyError, match="item_name"):
             format_items_to_str(
