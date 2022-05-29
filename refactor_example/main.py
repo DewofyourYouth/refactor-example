@@ -6,7 +6,7 @@ from colorama import Fore
 import inventory
 
 
-@dataclass
+@dataclass(slots=True)
 class OrderRow:
     item: inventory.InventoryItem
     quantity: int = 1
