@@ -44,14 +44,19 @@ def print_header(receipt_type: str) -> None:
     )
 
 
+def print_receipt(rf: ReceiptFormatter, order: sample_orders) -> None:
+    print(rf(order))
+
+
 def main() -> None:  # pragma: no cover
     print_header("TERMINAL")
     for order in sample_orders():
-        print(format_terminal_reciept(order))
+        print_receipt(format_terminal_reciept, order)
 
     print_header("HTML")
     for order in sample_orders():
-        print(format_html_receipt(order) + "\n")
+        print_receipt(format_html_receipt, order)
+        print("\n")
 
 
 if __name__ == "__main__":
