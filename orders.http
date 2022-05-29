@@ -1,2 +1,5 @@
-##
+###
 GET http://localhost:5000/orders
+
+###
+GET http://localhost:5000/receipt/09d37df9-48a1-4746-91fb-1bcd125a4ed5
