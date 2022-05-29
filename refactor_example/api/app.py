@@ -21,8 +21,7 @@ def orders():
 
 @app.route("/receipt/<string:order_id>")
 def receipt(order_id):
-    raise NotImplementedError()
-    # return sample_orders_dict[order_id]
+    return sample_orders_dict[order_id]
 
 
 def main():
