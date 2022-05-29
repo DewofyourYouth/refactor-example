@@ -44,7 +44,7 @@ def print_header(receipt_type: str) -> None:
     )
 
 
-def print_receipt(rf: ReceiptFormatter, order: sample_orders) -> None:
+def print_receipt(rf: ReceiptFormatter, order: Order) -> None:
     print(rf(order))
 
 
