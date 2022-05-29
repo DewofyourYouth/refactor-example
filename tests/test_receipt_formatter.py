@@ -11,7 +11,7 @@ from refactor_example.orders.output.receipt_formatter import (
 joe, peter, glenn = sample_orders()
 
 
-@mark.describe("Tests for receipt formatters")
+@mark.describe("format_item_to_str formats a list item in a receipt to a properly formatted string.")
 class TestCallableReceiptFormatters:
     @mark.it("The API formatter works")
     def test_callable_api_formatter(self):

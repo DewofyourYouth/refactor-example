@@ -5,7 +5,7 @@ from pytest import mark
 from refactor_example.api.app import app
 
 
-@mark.describe("Test the Flask endpoints")
+@mark.describe("The Flask API Endpoints")
 class TestFlaskApp:
     client = FlaskClient(app)
 
