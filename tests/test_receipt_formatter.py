@@ -15,7 +15,7 @@ from refactor_example.orders.output.receipt_formatter import (
 joe, peter, glenn = sample_orders()
 
 
-@mark.describe("Test the format_items_to_str function")
+@mark.describe("format_item_to_str formats a list item in a receipt to a properly formatted string.")
 class TestFormatItemsToStr:
     @mark.it(
         "format_items_to_str returns a string with all the items formatted according to the input string"
@@ -37,7 +37,7 @@ class TestFormatItemsToStr:
             )
 
 
-@mark.describe("Test HTML Receipt class")
+@mark.describe("Formats an order receipt as an HTML string.")
 class TestHTMLReceipt:
     hr = HTMLReceipt()
 
@@ -66,7 +66,7 @@ class TestHTMLReceipt:
         )
 
 
-@mark.describe("Test the Terminal Receipt class")
+@mark.describe("Formats an order to a string to printed as a receipt in the terminal.")
 class TestTerminalReceipt:
     tr = TerminalReceipt()
     glenn_str = tr.generate_receipt_str(order=glenn)
@@ -84,7 +84,7 @@ class TestTerminalReceipt:
         assert row_str in self.peter_str
 
 
-@mark.describe("Test API Receipt class")
+@mark.describe("JSONAPIReceipt formats an order to a JSON str for the API.")
 class TestAPIReceipt:
     jr = JSONAPIReceipt()
 
